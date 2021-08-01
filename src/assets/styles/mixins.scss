@@ -1,0 +1,22 @@
+
+@mixin flex($direction, $justify, $align) {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin text($fontFamily, $fontSize, $fontWeight, $lineHeight){
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  font-weight: $fontWeight;
+  line-height: $lineHeight;
+}
+
+@mixin container () {
+  width: 80%;
+  margin: 0 auto;
+}
+
+

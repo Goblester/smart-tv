@@ -3,10 +3,17 @@
 
 .default {
     @include flex(row, center, center);
+    @include text($primaryFontFamily, 16px, 500, 18px);
     padding: 16px;
     background-color: black;
     color: $bgColor;
     border: none;
     outline: none;
     width: 100%;
+}
+
+.disabled{
+    border: 1px solid #4E4E4E;
+    background: 0 0;
+    color: #4E4E4E;
 }

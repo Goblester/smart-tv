@@ -1,12 +1,12 @@
 import React from 'react';
 import { Banner } from '../features/Banner';
-import { NumberInput } from '../features/NumberInput';
+import { LeftPanel } from '../features/LeftPannel';
 import st from './App.module.scss';
 
 function App() {
     return (
         <div className={st.App}>
-            <NumberInput/>
+            <LeftPanel/>
             <Banner/>
         </div>
     );

@@ -1,0 +1,19 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
+.container {
+  box-sizing: border-box;
+  width: 380px;
+  height: 100vh;
+  padding: 40px 24px;
+  background-color: $bgColor;
+  @include flex(column, center, center);
+  position: fixed;
+  transition: $primaryTransition;
+}
+.show{
+  left: 0;
+}
+.hide{
+  left: -381px;
+}

@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import st from '../NumberInput.module.scss';
-import Button from '../../../components/Button/Button';
+import Button from '../../../../components/Button/Button';
 import classNames from 'classnames';
-import {useActions} from '../../../utils/redux-utils';
-import {appActions} from '../../Applicaton';
+import {useActions} from '../../../../utils/redux-utils';
+import {appActions} from '../../../Applicaton';
 
 export const DigitButtons: React.FC = () => {
     const [activeButton, setActiveButton] = useState<number | null>()

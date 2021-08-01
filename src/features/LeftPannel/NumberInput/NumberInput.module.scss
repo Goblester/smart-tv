@@ -1,19 +1,10 @@
-@import './src/assets/styles/variables';
-@import './src/assets/styles/mixins';
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
 
 .container {
-  box-sizing: border-box;
-  width: 380px;
-  height: 100vh;
-  padding: 40px 24px;
-  background-color: $bgColor;
-  @include flex(column, center, center);
-  position: fixed;
-  transition: $primaryTransition;
   & > * {
     margin-bottom: 10px;
   }
-
   h2 {
     @include text($primaryFontFamily, 26px, 400, 30px);
   }

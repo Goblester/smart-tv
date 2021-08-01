@@ -1,15 +1,15 @@
 import React, {useCallback} from 'react';
 import {useSelector} from 'react-redux';
-import {selectAgreement, selectPhoneNumber, selectStatus} from '../Applicaton/selectors';
-import {AppRootStateType} from '../../App/store';
-import Button from '../../components/Button/Button';
-import Checkbox from '../../components/Checkbox/Checkbox';
+import {selectAgreement, selectPhoneNumber, selectStatus} from '../../Applicaton/selectors';
+import {AppRootStateType} from '../../../App/store';
+import Button from '../../../components/Button/Button';
+import Checkbox from '../../../components/Checkbox/Checkbox';
 import st from './NumberInput.module.scss';
 import {DigitButtons} from './DigitButtons/DigitButtons';
-import {useActions} from '../../utils/redux-utils';
-import {appActions} from '../Applicaton';
-import Input from '../../components/Input/Input';
-import {AppStatusType} from '../Applicaton/application-reducer';
+import {useActions} from '../../../utils/redux-utils';
+import {appActions} from '../../Applicaton';
+import Input from '../../../components/Input/Input';
+import {AppStatusType} from '../../Applicaton/application-reducer';
 import classNames from 'classnames';
 
 

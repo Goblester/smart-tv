@@ -5,6 +5,7 @@ export const slice = createSlice({
     initialState: {
         status: 'idle',
         phoneNumber: [],
+        personalDataAgreement: false
     } as AppInitialStateType,
     reducers: {
         changeStatus: (state, action: PayloadAction<AppStatusType>) => {
@@ -19,6 +20,9 @@ export const slice = createSlice({
             if (state.phoneNumber.length !== 0) {
                 state.phoneNumber.pop();
             }
+        },
+        changePersonalDataAgreement: (state, action: PayloadAction<boolean>) => {
+            state.personalDataAgreement = action.payload;
         }
     },
 })
@@ -31,4 +35,6 @@ export type AppInitialStateType = {
     status: AppStatusType
     // вводимый телефонный номер
     phoneNumber: Array<number>
+    //согласие на обработку персональных данных
+    personalDataAgreement: boolean
 }

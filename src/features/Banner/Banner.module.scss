@@ -1,22 +1,38 @@
 @import "./src/assets/styles/mixins";
 @import "./src/assets/styles/variables";
 
-
-.container{
-  @include flex(column, center, center);
-  background-color: $bgColor;
-  padding: 10px;
-  width: 251px;
-  height: 357px;
-  p{
-    @include text($primaryFontFamily, 16px, 500, 18.75px);
-  }
-  figure{
-    figcaption{
-      @include text($primaryFontFamily, 14px, 400, 16.41px);
+.alignContainer{
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  @include flex(row, flex-end, center);
+  .container{
+    @include flex(column, center, center);
+    background-color: $bgColor;
+    padding: 10px;
+    width: 251px;
+    height: 357px;
+    transition: $primaryTransition;
+    position: fixed;
+    p{
+      @include text($primaryFontFamily, 16px, 500, 18.75px);
+    }
+    figure{
+      figcaption{
+        @include text($primaryFontFamily, 14px, 400, 16.41px);
+      }
+    }
+    .btnContainer{
+      width: 156px;
     }
   }
-  .btnContainer{
-    width: 156px;
+  .show{
+    right: 0;
+  }
+  .hide{
+    right: -252px;
   }
 }

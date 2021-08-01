@@ -1,10 +1,12 @@
 import React from 'react';
-import {Banner} from '../features/Banner/Banner';
-import './App.css';
+import { Banner } from '../features/Banner';
+import st from './App.module.scss';
 
 function App() {
     return (
-        <div className="App">
+        <div className={st.App}>
+            <div className={st.container}>
+            </div>
             <Banner/>
         </div>
     );

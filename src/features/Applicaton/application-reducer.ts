@@ -4,14 +4,21 @@ export const slice = createSlice({
     name: 'app',
     initialState: {
         status: 'idle',
-        phoneNumber: '+7(___)___-__-__'
+        phoneNumber: [],
     } as AppInitialStateType,
     reducers: {
-        changeStatus: (state, action: PayloadAction<AppStatusType>)=>{
+        changeStatus: (state, action: PayloadAction<AppStatusType>) => {
             state.status = action.payload;
         },
-        changePhoneNumber: (state, action: PayloadAction<string>)=>{
-            state.phoneNumber = action.payload;
+        addDigit: (state, action: PayloadAction<number>) => {
+            if (state.phoneNumber.length !== 10 && action.payload > -1 && action.payload < 10) {
+                state.phoneNumber.push(action.payload)
+            }
+        },
+        deleteDigit: (state, action: PayloadAction) => {
+            if (state.phoneNumber.length !== 0) {
+                state.phoneNumber.pop();
+            }
         }
     },
 })
@@ -23,5 +30,5 @@ export type AppInitialStateType = {
     // в каком состоянии находится пользовательский интерфейс
     status: AppStatusType
     // вводимый телефонный номер
-    phoneNumber: string
+    phoneNumber: Array<number>
 }

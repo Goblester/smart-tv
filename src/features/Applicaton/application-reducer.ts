@@ -4,7 +4,7 @@ export const slice = createSlice({
     name: 'app',
     initialState: {
         status: 'idle',
-        phoneNumber: ''
+        phoneNumber: '+7(___)___-__-__'
     } as AppInitialStateType,
     reducers: {
         changeStatus: (state, action: PayloadAction<AppStatusType>)=>{

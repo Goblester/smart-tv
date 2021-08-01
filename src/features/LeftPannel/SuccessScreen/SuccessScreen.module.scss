@@ -1,0 +1,15 @@
+@import './src/assets/styles/mixins';
+@import './src/assets/styles/variables';
+
+
+.container{
+  @include flex(column, center, center);
+  h2{
+    @include text($primaryFontFamily, 32px, bold, 37px);
+    margin: 15px 0;
+  }
+  p{
+    @include text($primaryFontFamily, 14px, normal, 16px);
+    margin: 10px 0;
+  }
+}

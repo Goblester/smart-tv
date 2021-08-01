@@ -1,0 +1,17 @@
+
+input.errorInput {
+    border-bottom: 2px solid #ef1a1a;
+    color: #ef1a1a;
+}
+
+.errorInput:focus{
+    padding-bottom: 6px;
+    font-weight: 700;
+    border-width: 3px;
+    border-image-slice: 1;
+    border-image: linear-gradient(to right, #8d2525, #cb0c0c);
+}
+
+span.error{
+    color: white
+}

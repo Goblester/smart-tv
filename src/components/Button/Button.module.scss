@@ -4,10 +4,10 @@
 .default {
     @include flex(row, center, center);
     @include text($primaryFontFamily, 16px, 500, 18px);
+    border: 1px solid #000;
     padding: 16px;
     background-color: black;
     color: $bgColor;
-    border: none;
     outline: none;
     width: 100%;
 }

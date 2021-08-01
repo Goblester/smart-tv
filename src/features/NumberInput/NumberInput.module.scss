@@ -8,16 +8,24 @@
   padding: 40px 24px;
   background-color: $bgColor;
   @include flex(column, center, center);
-  &>*{
+  position: fixed;
+  transition: $primaryTransition;
+  & > * {
     margin-bottom: 10px;
   }
+
   h2 {
     @include text($primaryFontFamily, 26px, 400, 30px);
   }
-
+  .hiddenInput {
+    display: none;
+  }
   p {
     @include text($primaryFontFamily, 14px, 400, 16px);
     margin-bottom: 20px;
+    &:nth-child(2n+1){
+      @include text($primaryFontFamily, 32px, bold, 37px);
+    }
   }
 
   .buttons {
@@ -27,15 +35,18 @@
       flex: 0 0 30%;
       margin-bottom: 10px;
     }
-    .deleteBtn{
+
+    .deleteBtn {
       flex: 0 0 65%;
     }
-    .outBtn{
+
+    .outBtn {
       @include text($primaryFontFamily, 16px, 500, 19px);
       border: 2px solid #000;
       background: 0 0;
       color: #000;
-      &:hover{
+
+      &:hover {
         background-color: black;
         color: $bgColor;
         border: none;
@@ -44,7 +55,6 @@
 
 
   }
-
   .label {
     @include text($primaryFontFamily, 14px, 400, 16px);
     color: #565656;
@@ -53,4 +63,12 @@
     margin-left: 10px;
   }
 
+}
+
+
+.show{
+  left: 0;
+}
+.hide{
+  left: -381px;
 }

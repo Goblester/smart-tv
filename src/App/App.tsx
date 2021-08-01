@@ -1,7 +1,7 @@
 import React from 'react';
 import { Banner } from '../features/Banner';
+import { NumberInput } from '../features/NumberInput';
 import st from './App.module.scss';
-import {NumberInput} from '../features/NumberInput/NumberIntput';
 
 function App() {
     return (

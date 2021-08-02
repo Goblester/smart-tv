@@ -15,3 +15,6 @@ export const selectCurrentKey = (state: AppRootStateType) => {
 
 }
 
+export const selectCompleted = (state: AppRootStateType) => state.app.phoneNumber.length === 10;
+
+

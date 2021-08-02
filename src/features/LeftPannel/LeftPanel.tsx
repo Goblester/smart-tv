@@ -5,6 +5,7 @@ import {AppRootStateType} from '../../App/store';
 import {AppStatusType, CoordinatesShiftType, CoordinatesType, KeyMapType} from '../Applicaton/application-reducer';
 import {
     selectAgreement,
+    selectCompleted,
     selectCoordinates,
     selectCurrentKey,
     selectKeyMap,
@@ -22,9 +23,18 @@ const inputKeyMap = [
     ['4', '5', '6', 'x'],
     ['7', '8', '9', 'x'],
     ['del', 'del', '0', 'x'],
-    ['check', 'check', 'check', 'x'],
-    ['submit', 'submit', 'submit', 'x'],
+    ['check', 'check', 'check', 'x']
 ]
+
+const completedInputKeyMap = [
+    ['1', '2', '3', 'x'],
+    ['4', '5', '6', 'x'],
+    ['7', '8', '9', 'x'],
+    ['del', 'del', '0', 'x'],
+    ['check', 'check', 'check', 'x'],
+    ['submit', 'submit', 'submit', 'x']
+]
+
 
 const successKeyMap = [
     ['x']
@@ -45,6 +55,7 @@ export const LeftPanel: React.FC = () => {
     const keyMap = useSelector<AppRootStateType, KeyMapType>(selectKeyMap);
     const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
     const agreement = useSelector<AppRootStateType, boolean>(selectAgreement);
+    const isCompleted = useSelector<AppRootStateType, boolean>(selectCompleted);
 
     useEffect(() => {
         if (status === 'enter') {
@@ -54,6 +65,20 @@ export const LeftPanel: React.FC = () => {
         }
     }, [status, changeCurKeyMap])
     debugger;
+
+    useEffect(() => {
+        if (status === 'enter') {
+            changeCurKeyMap(inputKeyMap);
+        } else if (status === 'succeeded') {
+            changeCurKeyMap(successKeyMap);
+        }
+    }, [status, changeCurKeyMap])
+
+    useEffect(() => {
+        if (isCompleted) {
+            changeCurKeyMap(completedInputKeyMap);
+        }
+    }, [isCompleted, changeCurKeyMap])
 
     const onKeyDown = useCallback(({key}: KeyboardEvent) => {
         debugger;

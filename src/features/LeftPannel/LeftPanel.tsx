@@ -70,7 +70,7 @@ export const LeftPanel: React.FC = () => {
         <div className={containerClasses}>
             {status === 'enter' && <NumberInput/>}
             {status === 'succeeded' && <SuccessScreen/>}
-            <CloseButton/>
+            {status !== 'idle' && <CloseButton/>}
         </div>
     )
 }

@@ -8,7 +8,7 @@ import classNames from 'classnames';
 import {useEffect, useState} from 'react';
 import {useActions} from '../../utils/redux-utils';
 import {appActions} from '../Applicaton';
-import {selectCurrentKey, selectStatus} from '../Applicaton/selectors';
+import {selectCurrentKey, selectIdle, selectStatus} from '../Applicaton/selectors';
 
 const keyMap = [['ok']]
 
@@ -16,29 +16,36 @@ export const Banner = () => {
     const status = useSelector<AppRootStateType, AppStatusType>(selectStatus);
     const [show, setShow] = useState<boolean>(false);
     const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
+    const isIdle = useSelector<AppRootStateType, boolean>(selectIdle);
 
     const {changeStatus, changeCurKeyMap} = useActions(appActions);
 
     useEffect(() => {
-        changeCurKeyMap(keyMap);
-    }, [changeCurKeyMap])
+        if(isIdle){
+            changeCurKeyMap(keyMap);
+        }
+    }, [isIdle, changeCurKeyMap])
 
     useEffect(() => {
+        debugger;
         if (status === 'idle') {
             let timeoutId = setTimeout(() => {
+                console.log('show timeout');
                 setShow(true);
             }, 5000)
             return (() => {
                 clearTimeout(timeoutId);
             })
         }
+        if(status === 'enter'){
+            setShow(false);
+        }
     }, [status]);
 
     const onOKClick = () => {
-        setShow(false);
         show && changeStatus('enter');
     }
-    const showBanner = show&&status === 'idle';
+    const showBanner = show&&isIdle;
     const containerClassName = classNames(st.container, showBanner ? st.show : st.hide);
 
     return (

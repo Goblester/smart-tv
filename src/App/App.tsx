@@ -62,6 +62,8 @@ function App() {
                     changeStatus('succeeded');
                 } else if (curKey === 'ok') {
                     changeStatus('enter');
+                }else if (curKey === 'x'){
+                    changeStatus('idle');
                 }
         }
         if (shift) {

@@ -33,15 +33,6 @@
 
     .outBtn {
       @include text($primaryFontFamily, 16px, 500, 19px);
-      border: 2px solid #000;
-      background: 0 0;
-      color: #000;
-
-      &:hover {
-        background-color: black;
-        color: $bgColor;
-        border: none;
-      }
     }
 
 

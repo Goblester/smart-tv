@@ -31,6 +31,12 @@ label {
       transition: all 350ms cubic-bezier(1, 0, .37, .91);
     }
   }
+  .active{
+    border: 4px solid #000;
+    path{
+      stroke-width: 4px;
+    }
+  }
 
 }
 

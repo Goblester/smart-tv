@@ -29,7 +29,7 @@ export const Banner = () => {
 
     const onOKClick = () => {
         setShow(false);
-        changeStatus('enter');
+        show&&changeStatus('enter');
     }
     const containerClassName = classNames(st.container, show ? st.show : st.hide);
 

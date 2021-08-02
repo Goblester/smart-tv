@@ -8,6 +8,7 @@ type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElem
 type SuperCheckboxPropsType = DefaultInputPropsType & {
     onChangeChecked?: (checked: boolean) => void
     spanClassName?: string
+    active?: boolean
 }
 
 const Checkbox: React.FC<SuperCheckboxPropsType> = (
@@ -17,6 +18,7 @@ const Checkbox: React.FC<SuperCheckboxPropsType> = (
         className, spanClassName,
         children, // в эту переменную попадёт текст, типизировать не нужно так как он затипизирован в React.FC
         value,
+        active,
         ...restProps// все остальные пропсы попадут в объект restProps
     }
 ) => {
@@ -25,8 +27,9 @@ const Checkbox: React.FC<SuperCheckboxPropsType> = (
         onChangeChecked && onChangeChecked(e.currentTarget.checked);
     }
 
-    const finalInputClassName =  classNames(st.checkbox, className);
-    const finalSpanClassName =  classNames(st.spanClassName,spanClassName);
+    const finalInputClassName = classNames(st.checkbox, className);
+    const finalSpanClassName = classNames(st.spanClassName, spanClassName);
+    const activeClassName = classNames({[st.active]: active});
     return (
         <label>
             <input
@@ -36,7 +39,7 @@ const Checkbox: React.FC<SuperCheckboxPropsType> = (
                 value={value}
                 {...restProps} // отдаём инпуту остальные пропсы если они есть (checked например там внутри)
             />
-            <svg viewBox="0,0,30,30">
+            <svg viewBox="0,0,30,30" className={activeClassName}>
                 <path d="M 3 14 L 12 23 L 27 7"/>
             </svg>
             {children && <span className={finalSpanClassName}>{children}</span>}

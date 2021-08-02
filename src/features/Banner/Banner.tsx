@@ -8,13 +8,20 @@ import classNames from 'classnames';
 import {useEffect, useState} from 'react';
 import {useActions} from '../../utils/redux-utils';
 import {appActions} from '../Applicaton';
-import {selectStatus} from '../Applicaton/selectors';
+import {selectCurrentKey, selectStatus} from '../Applicaton/selectors';
+
+const keyMap = [['ok']]
 
 export const Banner = () => {
     const status = useSelector<AppRootStateType, AppStatusType>(selectStatus);
     const [show, setShow] = useState<boolean>(false);
+    const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
 
-    const {changeStatus} = useActions(appActions);
+    const {changeStatus, changeCurKeyMap} = useActions(appActions);
+
+    useEffect(() => {
+        changeCurKeyMap(keyMap);
+    }, [changeCurKeyMap])
 
     useEffect(() => {
         if (status === 'idle') {
@@ -29,9 +36,10 @@ export const Banner = () => {
 
     const onOKClick = () => {
         setShow(false);
-        show&&changeStatus('enter');
+        show && changeStatus('enter');
     }
-    const containerClassName = classNames(st.container, show ? st.show : st.hide);
+    const showBanner = show&&status === 'idle';
+    const containerClassName = classNames(st.container, showBanner ? st.show : st.hide);
 
     return (
         <div className={st.alignContainer}>
@@ -42,7 +50,9 @@ export const Banner = () => {
                     <figcaption>Сканируйте QR-код или нажмите ОК</figcaption>
                 </figure>
                 <div className={st.btnContainer}>
-                    <Button className={st.button} onClick={onOKClick}>OK</Button>
+                    <Button className={st.button}
+                            onClick={onOKClick}
+                    active={curKey === 'ok'}>OK</Button>
                 </div>
             </div>
         </div>

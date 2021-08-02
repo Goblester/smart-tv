@@ -10,7 +10,7 @@
     width: 100%;
     border: 2px solid #000;
     background: 0 0;
-    &:hover{
+    &:active{
         background-color: black;
         color: $bgColor;
     }

@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
-import { Banner } from '../features/Banner';
-import { LeftPanel } from '../features/LeftPannel';
+import {Banner} from '../features/Banner';
+import {LeftPanel} from '../features/LeftPannel';
 import st from './App.module.scss';
 import {CoordinatesShiftType, CoordinatesType, KeyMapType} from '../features/Applicaton/application-reducer';
 import {limitCoordinates} from '../utils/ui-utils';
@@ -61,7 +61,7 @@ function App() {
                     changePersonalDataAgreement(!agreement)
                 } else if (curKey === 'submit') {
                     changeStatus('succeeded');
-                }else if(curKey === 'ok'){
+                } else if (curKey === 'ok') {
                     changeStatus('enter');
                 }
         }
@@ -72,12 +72,18 @@ function App() {
 
     }, [addDigit, deleteDigit, coordinates, keyMap, changeKeyCoordinates, curKey, agreement, changePersonalDataAgreement, changeStatus])
 
+    const onClick = useCallback(() => {
+        changeKeyCoordinates([-1, -1]);
+    }, [changeKeyCoordinates])
+
     useEffect(() => {
         window.addEventListener('keydown', onKeyDown);
+        window.addEventListener('click', onClick);
         return () => {
             window.removeEventListener('keydown', onKeyDown);
+            window.removeEventListener('click', onClick);
         }
-    }, [onKeyDown])
+    }, [onKeyDown, onClick])
 
 
     return (

@@ -7,18 +7,19 @@ export const selectCoordinates = (state: AppRootStateType) => state.app.keyCoord
 export const selectKeyMap = (state: AppRootStateType) => state.app.curKeyMap;
 export const selectCurrentKey = (state: AppRootStateType) => {
     const [y, x] = state.app.keyCoordinates;
-    if(y === -1){
-       return null
-    }else{
+    if (y === -1) {
+        return null
+    } else {
         return state.app.curKeyMap[y][x];
     }
 }
 
 export const selectCompleted = (state: AppRootStateType) => state.app.phoneNumber.length === 10;
-export const selectIdle = (state: AppRootStateType) => state.app.status === 'idle';
+export const selectIsIdle = (state: AppRootStateType) => state.app.status === 'idle';
+export const selectShowHood = (state: AppRootStateType) => state.app.status !== 'idle' && state.app.status !== 'finished';
 export const selectShowBanner = (state: AppRootStateType) => {
     console.log(state.app.currentTime)
-return state.app.currentTime > 5;
+    return state.app.currentTime > 5;
 }
 
 

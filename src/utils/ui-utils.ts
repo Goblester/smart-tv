@@ -1,4 +1,5 @@
 import {CoordinatesShiftType, CoordinatesType} from '../features/Applicaton/application-reducer';
+import {ActionCreatorsMapObject} from 'redux';
 
 
 export const phoneNumberToString = (numbers: Array<number>) => {
@@ -39,5 +40,27 @@ export const limitCoordinates = (coordinates: CoordinatesType, shift: Coordinate
         if (curKey !== newKey) {
             return [y, x];
         }
+    }
+}
+
+export const applyAction = (curKey: string | null, appActions: ActionCreatorsMapObject) => {
+
+
+    if (!curKey) {
+        return
+    }
+    if (/[0-9]/.test(curKey)) {
+        const digit = Number(curKey);
+        appActions.addDigit(digit);
+    } else if (curKey === 'del') {
+        appActions.deleteDigit();
+    } else if (curKey === 'check') {
+        appActions.changePersonalDataAgreement()
+    } else if (curKey === 'submit') {
+        appActions.changeStatus('succeeded');
+    } else if (curKey === 'ok') {
+        appActions.changeStatus('enter');
+    } else if (curKey === 'x') {
+        appActions.changeStatus('finished');
     }
 }

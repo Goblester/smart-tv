@@ -19,20 +19,19 @@ export const slice = createSlice({
                 state.phoneNumber.push(action.payload)
             }
         },
-        deleteDigit: (state, action: PayloadAction) => {
+        deleteDigit: (state) => {
             if (state.phoneNumber.length !== 0) {
                 state.phoneNumber.pop();
             }
         },
-        changePersonalDataAgreement: (state, action: PayloadAction<boolean>) => {
-            state.personalDataAgreement = action.payload;
+        changePersonalDataAgreement: (state) => {
+            state.personalDataAgreement = !state.personalDataAgreement;
         },
         changeKeyCoordinates: (state, action: PayloadAction<CoordinatesType>) => {
             state.keyCoordinates = action.payload;
         },
         changeCurKeyMap: (state, action: PayloadAction<KeyMapType>) => {
             state.curKeyMap = action.payload;
-            state.keyCoordinates = [-1,-1];
         },
         changeCurrentTime: (state, action: PayloadAction<number>) => {
             state.currentTime = action.payload;
@@ -44,7 +43,7 @@ export const slice = createSlice({
 
 
 
-export type AppStatusType = 'idle' | 'enter' | 'succeeded'
+export type AppStatusType = 'idle' | 'enter' | 'succeeded' | 'finished'
 export type AppInitialStateType = {
     // в каком состоянии находится пользовательский интерфейс
     status: AppStatusType

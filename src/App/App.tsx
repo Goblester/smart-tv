@@ -3,16 +3,15 @@ import {Banner} from '../features/Banner';
 import {LeftPanel} from '../features/LeftPannel';
 import st from './App.module.scss';
 import {CoordinatesShiftType, CoordinatesType, KeyMapType} from '../features/Applicaton/application-reducer';
-import {limitCoordinates} from '../utils/ui-utils';
+import {applyAction, limitCoordinates} from '../utils/ui-utils';
 import {useSelector} from 'react-redux';
 import {AppRootStateType} from './store';
-import {selectAgreement, selectCoordinates, selectCurrentKey, selectKeyMap} from '../features/Applicaton/selectors';
 import {useActions} from '../utils/redux-utils';
-import {appActions} from '../features/Applicaton';
-import { YoutubeEmbed } from '../features/Video';
+import {appActions, appSelectors} from '../features/Applicaton';
+import {YoutubeEmbed} from '../features/Video';
 
 function App() {
-
+    //state
     const {
         addDigit,
         deleteDigit,
@@ -21,11 +20,12 @@ function App() {
         changeStatus
     } = useActions(appActions)
 
-    const coordinates = useSelector<AppRootStateType, CoordinatesType>(selectCoordinates);
-    const keyMap = useSelector<AppRootStateType, KeyMapType>(selectKeyMap);
-    const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
-    const agreement = useSelector<AppRootStateType, boolean>(selectAgreement);
+    const coordinates = useSelector<AppRootStateType, CoordinatesType>(appSelectors.selectCoordinates);
+    const keyMap = useSelector<AppRootStateType, KeyMapType>(appSelectors.selectKeyMap);
+    const curKey = useSelector<AppRootStateType, string | null>(appSelectors.selectCurrentKey);
 
+
+    //functions
     const onKeyDown = useCallback(({key}: KeyboardEvent) => {
         let shift: CoordinatesShiftType | null = null;
         switch (true) {
@@ -49,30 +49,25 @@ function App() {
                 shift = {y: 1};
                 break;
             case key === 'Enter':
-                if (!curKey) {
-                    return
-                }
-                if (/[0-9]/.test(curKey)) {
-                    const digit = Number(curKey);
-                    addDigit(digit);
-                } else if (curKey === 'del') {
-                    deleteDigit();
-                } else if (curKey === 'check') {
-                    changePersonalDataAgreement(!agreement)
-                } else if (curKey === 'submit') {
-                    changeStatus('succeeded');
-                } else if (curKey === 'ok') {
-                    changeStatus('enter');
-                } else if (curKey === 'x') {
-                    changeStatus('idle');
-                }
+                applyAction(curKey, {
+                    addDigit,
+                    deleteDigit,
+                    changeKeyCoordinates,
+                    changePersonalDataAgreement,
+                    changeStatus
+                })
         }
         if (shift) {
             const newCoordinates = limitCoordinates(coordinates, shift, keyMap);
             changeKeyCoordinates(newCoordinates);
         }
 
-    }, [addDigit, deleteDigit, coordinates, keyMap, changeKeyCoordinates, curKey, agreement, changePersonalDataAgreement, changeStatus])
+    }, [curKey, keyMap,coordinates,
+        addDigit,
+        deleteDigit,
+        changeKeyCoordinates,
+        changePersonalDataAgreement,
+        changeStatus])
 
     const onClick = useCallback(() => {
         changeKeyCoordinates([-1, -1]);

@@ -3,12 +3,11 @@ import {useSelector} from 'react-redux';
 import st from './LeftPanel.module.scss';
 import {AppRootStateType} from '../../App/store';
 import {AppStatusType} from '../Applicaton/application-reducer';
-import {selectCompleted, selectStatus} from '../Applicaton/selectors';
 import classNames from 'classnames';
 import {NumberInput} from './NumberInput/NumberInput';
 import {SuccessScreen} from './SuccessScreen/SuccessScreen';
 import {useActions} from '../../utils/redux-utils';
-import {appActions} from '../Applicaton';
+import {appActions, appSelectors} from '../Applicaton';
 import {CloseButton} from '../CloseButton';
 
 const inputKeyMap = [
@@ -35,20 +34,23 @@ const successKeyMap = [
 
 
 export const LeftPanel: React.FC = () => {
+    //state
     const {
-        changeCurKeyMap
+        changeCurKeyMap,
+        changeKeyCoordinates
     } = useActions(appActions)
-    const status = useSelector<AppRootStateType, AppStatusType>(selectStatus);
-
-    const isCompleted = useSelector<AppRootStateType, boolean>(selectCompleted);
+    const status = useSelector<AppRootStateType, AppStatusType>(appSelectors.selectStatus);
+    const showHood = useSelector<AppRootStateType, boolean>(appSelectors.selectShowHood);
+    const isCompleted = useSelector<AppRootStateType, boolean>(appSelectors.selectCompleted);
 
     useEffect(() => {
         if (status === 'enter') {
             changeCurKeyMap(inputKeyMap);
         } else if (status === 'succeeded') {
             changeCurKeyMap(successKeyMap);
+            changeKeyCoordinates([-1, -1])
         }
-    }, [status, changeCurKeyMap])
+    }, [status, changeCurKeyMap, changeKeyCoordinates])
 
     useEffect(() => {
         if (status === 'enter') {
@@ -64,13 +66,15 @@ export const LeftPanel: React.FC = () => {
         }
     }, [isCompleted, changeCurKeyMap])
 
-    const containerClasses = classNames(st.container, status !== 'idle' ? st.show : st.hide);
+    //functions
+
+    const containerClasses = classNames(st.container, showHood ? st.show : st.hide);
 
     return (
         <div className={containerClasses}>
             {status === 'enter' && <NumberInput/>}
             {status === 'succeeded' && <SuccessScreen/>}
-            {status !== 'idle' && <CloseButton/>}
+            {showHood && <CloseButton/>}
         </div>
     )
 }

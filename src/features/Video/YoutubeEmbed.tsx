@@ -1,6 +1,6 @@
 import YouTube, {Options} from 'react-youtube';
 import useWindowSize from '../../utils/useWindowSize';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {TimeoutId} from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 import st from './YoutubeEmbed.module.scss';
 import classNames from 'classnames';
@@ -15,6 +15,7 @@ type PlayerType = {
 }
 
 export const YoutubeEmbed = ({embedId}: { embedId: string }) => {
+    //state
     const [videoToggle, setVideoToggle] = useState<boolean>(false);
     const [isInitialized, setInitialised] = useState<boolean>(false);
     const [player, setPlayer] = useState<PlayerType | null>(null);
@@ -23,6 +24,7 @@ export const YoutubeEmbed = ({embedId}: { embedId: string }) => {
     const shadowClassName = classNames(st.shadow, {[st.show]: isInitialized});
     const size = useWindowSize();
 
+    //functions
     const onToggleClick = () => {
         if (!videoToggle) {
             player && player.playVideo();
@@ -34,25 +36,25 @@ export const YoutubeEmbed = ({embedId}: { embedId: string }) => {
 
     }
 
-    const onReady = (event: { target: PlayerType }) => {
+    const onReady = useCallback ((event: { target: PlayerType }) => {
         setPlayer(event.target);
         setInitialised(true);
         event.target.setVolume(1);
-    };
+    },[]);
 
 
-    const onPlay = () => {
+    const onPlay = useCallback (() => {
         if (player) {
             const Id = setInterval(() => {
                 changeCurrentTime(player.getCurrentTime())
             }, 100)
             setIntervalId(Id);
         }
-    }
+    },[changeCurrentTime, player])
 
-    const onStop = () => {
+    const onStop = useCallback (() => {
         intervalId&&clearInterval(intervalId)
-    }
+    },[intervalId]);
 
     const opts: Options = {
         height: `${size.height}`,

@@ -4,30 +4,31 @@ import st from './Banner.module.scss';
 import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../../App/store';
 import classNames from 'classnames';
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useActions} from '../../utils/redux-utils';
-import {appActions} from '../Applicaton';
-import {selectCurrentKey, selectIdle, selectShowBanner} from '../Applicaton/selectors';
+import {appActions, appSelectors} from '../Applicaton';
 
 const keyMap = [['ok']]
 
 export const Banner = () => {
-    const show = useSelector<AppRootStateType, boolean>(selectShowBanner);
-    const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
-    const isIdle = useSelector<AppRootStateType, boolean>(selectIdle);
-
-    const {changeStatus, changeCurKeyMap} = useActions(appActions);
+    //state
+    const show = useSelector<AppRootStateType, boolean>(appSelectors.selectShowBanner);
+    const curKey = useSelector<AppRootStateType, string | null>(appSelectors.selectCurrentKey);
+    const isIdle = useSelector<AppRootStateType, boolean>(appSelectors.selectIsIdle);
+    const {changeStatus, changeCurKeyMap, changeKeyCoordinates} = useActions(appActions);
 
     useEffect(() => {
         if (isIdle) {
             changeCurKeyMap(keyMap);
+            changeKeyCoordinates([-1, -1]);
         }
-    }, [isIdle, changeCurKeyMap])
+    }, [isIdle, changeCurKeyMap, changeKeyCoordinates])
 
-
-    const onOKClick = () => {
+    //functions
+    const onOKClick = useCallback(() => {
         show && changeStatus('enter');
-    }
+    }, [show, changeStatus])
+
     const showBanner = show && isIdle;
     const containerClassName = classNames(st.container, showBanner ? st.show : st.hide);
 

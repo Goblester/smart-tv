@@ -53,7 +53,7 @@ test('deleteDigit should work correctly', () => {
 })
 
 test('changePersonalDataAgreement should work correctly', () => {
-    const action = appActions.changePersonalDataAgreement(true);
+    const action = appActions.changePersonalDataAgreement();
 
     const newState = appReducer(initState, action);
 

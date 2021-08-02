@@ -1,40 +1,39 @@
 import React, {useCallback} from 'react';
 import {useSelector} from 'react-redux';
-import {selectAgreement, selectCurrentKey, selectPhoneNumber} from '../../Applicaton/selectors';
 import {AppRootStateType} from '../../../App/store';
 import Button from '../../../components/Button/Button';
 import Checkbox from '../../../components/Checkbox/Checkbox';
 import st from './NumberInput.module.scss';
 import {DigitButtons} from './DigitButtons/DigitButtons';
 import {useActions} from '../../../utils/redux-utils';
-import {appActions} from '../../Applicaton';
+import {appActions, appSelectors} from '../../Applicaton';
 import Input from '../../../components/Input/Input';
 import classNames from 'classnames';
 import {phoneNumberToString} from '../../../utils/ui-utils';
 
 
 export const NumberInput: React.FC = () => {
-
+    //state
     const {
         changePersonalDataAgreement,
         changeStatus
     } = useActions(appActions);
-    const phoneNumberArr = useSelector<AppRootStateType, Array<number>>(selectPhoneNumber);
-    const agreement = useSelector<AppRootStateType, boolean>(selectAgreement);
-    const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
+    const phoneNumberArr = useSelector<AppRootStateType, Array<number>>(appSelectors.selectPhoneNumber);
+    const agreement = useSelector<AppRootStateType, boolean>(appSelectors.selectAgreement);
+    const curKey = useSelector<AppRootStateType, string | null>(appSelectors.selectCurrentKey);
     const phoneNumber = phoneNumberToString(phoneNumberArr);
-    const submitDisabled = phoneNumberArr.length !== 10;
 
-
-    const onAgreementChange = useCallback((agreement: boolean) => {
-        changePersonalDataAgreement(agreement)
+    //functions
+    const onAgreementChange = useCallback(() => {
+        changePersonalDataAgreement()
     }, [changePersonalDataAgreement]);
     const containerClasses = classNames(st.container)
 
-    const onSubmitClick = () => {
+    const onSubmitClick = useCallback (() => {
         changeStatus('succeeded');
-    }
+    },[changeStatus])
 
+    const submitDisabled = phoneNumberArr.length !== 10;
 
     return (
         <div className={containerClasses}>

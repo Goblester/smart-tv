@@ -14,7 +14,7 @@ export const CloseButton: React.FC = () => {
     const buttonClassName = classNames(st.activeBtn, {[st.currentBtn]: isCurrentButton})
 
     const onCloseButtonClick = () => {
-        changeStatus('idle');
+        changeStatus('finished');
     }
 
     return (

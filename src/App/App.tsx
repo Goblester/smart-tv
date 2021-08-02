@@ -9,6 +9,7 @@ import {AppRootStateType} from './store';
 import {selectAgreement, selectCoordinates, selectCurrentKey, selectKeyMap} from '../features/Applicaton/selectors';
 import {useActions} from '../utils/redux-utils';
 import {appActions} from '../features/Applicaton';
+import {YoutubeEmbed} from '../features/Video/YoutubeEmbed';
 
 function App() {
 
@@ -62,7 +63,7 @@ function App() {
                     changeStatus('succeeded');
                 } else if (curKey === 'ok') {
                     changeStatus('enter');
-                }else if (curKey === 'x'){
+                } else if (curKey === 'x') {
                     changeStatus('idle');
                 }
         }
@@ -91,6 +92,7 @@ function App() {
         <div className={st.App}>
             <LeftPanel/>
             <Banner/>
+            <YoutubeEmbed embedId={'dbvi_S3fy2M'}/>
         </div>
     );
 }

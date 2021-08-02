@@ -21,23 +21,21 @@ export const Banner = () => {
     const {changeStatus, changeCurKeyMap} = useActions(appActions);
 
     useEffect(() => {
-        if(isIdle){
+        if (isIdle) {
             changeCurKeyMap(keyMap);
         }
     }, [isIdle, changeCurKeyMap])
 
     useEffect(() => {
-        debugger;
         if (status === 'idle') {
             let timeoutId = setTimeout(() => {
-                console.log('show timeout');
                 setShow(true);
             }, 5000)
             return (() => {
                 clearTimeout(timeoutId);
             })
         }
-        if(status === 'enter'){
+        if (status === 'enter') {
             setShow(false);
         }
     }, [status]);
@@ -45,7 +43,7 @@ export const Banner = () => {
     const onOKClick = () => {
         show && changeStatus('enter');
     }
-    const showBanner = show&&isIdle;
+    const showBanner = show && isIdle;
     const containerClassName = classNames(st.container, showBanner ? st.show : st.hide);
 
     return (
@@ -59,7 +57,7 @@ export const Banner = () => {
                 <div className={st.btnContainer}>
                     <Button className={st.button}
                             onClick={onOKClick}
-                    active={curKey === 'ok'}>OK</Button>
+                            active={curKey === 'ok'}>OK</Button>
                 </div>
             </div>
         </div>

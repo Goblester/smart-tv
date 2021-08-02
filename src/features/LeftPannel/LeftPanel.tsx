@@ -5,7 +5,7 @@ import {AppRootStateType} from '../../App/store';
 import {AppStatusType} from '../Applicaton/application-reducer';
 import {selectStatus} from '../Applicaton/selectors';
 import classNames from 'classnames';
-import { NumberInput } from './NumberInput/NumberIntput';
+import { NumberInput } from './NumberInput/NumberInput';
 import {SuccessScreen} from './SuccessScreen/SuccessScreen';
 
 export const LeftPanel: React.FC = () => {

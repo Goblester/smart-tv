@@ -29,7 +29,7 @@ export const DigitButtons: React.FC = () => {
                 }
 
                 return (
-                    <Button className={buttonClass} onClick={onBtnClick}>{content}</Button>
+                    <Button key={ind} className={buttonClass} onClick={onBtnClick}>{content}</Button>
                 )
 
             })}

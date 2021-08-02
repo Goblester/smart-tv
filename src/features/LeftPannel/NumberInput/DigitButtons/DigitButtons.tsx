@@ -12,7 +12,6 @@ export const DigitButtons: React.FC = () => {
     const {addDigit, deleteDigit} = useActions(appActions);
     const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
     const buttonsArray: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, -1, 0];
-debugger;
     return (
         <div className={st.buttons}>
             {buttonsArray.map(ind => {

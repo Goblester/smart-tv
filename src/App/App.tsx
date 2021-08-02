@@ -26,7 +26,6 @@ function App() {
     const agreement = useSelector<AppRootStateType, boolean>(selectAgreement);
 
     const onKeyDown = useCallback(({key}: KeyboardEvent) => {
-        debugger;
         let shift: CoordinatesShiftType | null = null;
         switch (true) {
             case /[0-9]/.test(key):

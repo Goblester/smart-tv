@@ -9,6 +9,7 @@ import {NumberInput} from './NumberInput/NumberInput';
 import {SuccessScreen} from './SuccessScreen/SuccessScreen';
 import {useActions} from '../../utils/redux-utils';
 import {appActions} from '../Applicaton';
+import {CloseButton} from '../CloseButton';
 
 const inputKeyMap = [
     ['1', '2', '3', 'x'],
@@ -48,7 +49,6 @@ export const LeftPanel: React.FC = () => {
             changeCurKeyMap(successKeyMap);
         }
     }, [status, changeCurKeyMap])
-    debugger;
 
     useEffect(() => {
         if (status === 'enter') {
@@ -70,6 +70,7 @@ export const LeftPanel: React.FC = () => {
         <div className={containerClasses}>
             {status === 'enter' && <NumberInput/>}
             {status === 'succeeded' && <SuccessScreen/>}
+            <CloseButton/>
         </div>
     )
 }

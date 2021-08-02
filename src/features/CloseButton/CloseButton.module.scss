@@ -1,0 +1,36 @@
+
+.container {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  width: 88px;
+  height: 52px;
+
+  .activeBtn {
+    svg {
+      width: 21px;
+      line {
+        stroke-width: 2.5;
+        stroke: black;
+        stroke-linecap: butt;
+        stroke-miterlimit: 10;
+      }
+    }
+
+    &:active {
+      svg {
+        line {
+          stroke: #fff;
+        }
+      }
+    }
+  }
+
+  .currentBtn {
+    svg {
+      line {
+        stroke: #fff;
+      }
+    }
+  }
+}

@@ -12,10 +12,13 @@ export const selectCurrentKey = (state: AppRootStateType) => {
     }else{
         return state.app.curKeyMap[y][x];
     }
-
 }
 
 export const selectCompleted = (state: AppRootStateType) => state.app.phoneNumber.length === 10;
 export const selectIdle = (state: AppRootStateType) => state.app.status === 'idle';
+export const selectShowBanner = (state: AppRootStateType) => {
+    console.log(state.app.currentTime)
+return state.app.currentTime > 5;
+}
 
 

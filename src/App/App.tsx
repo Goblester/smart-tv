@@ -9,7 +9,7 @@ import {AppRootStateType} from './store';
 import {selectAgreement, selectCoordinates, selectCurrentKey, selectKeyMap} from '../features/Applicaton/selectors';
 import {useActions} from '../utils/redux-utils';
 import {appActions} from '../features/Applicaton';
-import {YoutubeEmbed} from '../features/Video/YoutubeEmbed';
+import { YoutubeEmbed } from '../features/Video';
 
 function App() {
 

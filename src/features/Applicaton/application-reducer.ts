@@ -7,7 +7,8 @@ export const slice = createSlice({
         phoneNumber: [],
         personalDataAgreement: false,
         keyCoordinates: [-1, -1],
-        curKeyMap: [['ok']]
+        curKeyMap: [['ok']],
+        currentTime: 0
     } as AppInitialStateType,
     reducers: {
         changeStatus: (state, action: PayloadAction<AppStatusType>) => {
@@ -32,7 +33,9 @@ export const slice = createSlice({
         changeCurKeyMap: (state, action: PayloadAction<KeyMapType>) => {
             state.curKeyMap = action.payload;
             state.keyCoordinates = [-1,-1];
-
+        },
+        changeCurrentTime: (state, action: PayloadAction<number>) => {
+            state.currentTime = action.payload;
         }
     },
 })
@@ -42,7 +45,6 @@ export const slice = createSlice({
 
 
 export type AppStatusType = 'idle' | 'enter' | 'succeeded'
-export type ActiveButtontType = 'digit' | ''
 export type AppInitialStateType = {
     // в каком состоянии находится пользовательский интерфейс
     status: AppStatusType
@@ -54,6 +56,8 @@ export type AppInitialStateType = {
     keyCoordinates: [number, number]
     //текущая карта кнопок
     curKeyMap: KeyMapType
+    //текущее время видео
+    currentTime: number
 }
 
 export type CoordinatesShiftType = {

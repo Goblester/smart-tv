@@ -1,46 +1,57 @@
 import YouTube, {Options} from 'react-youtube';
 import useWindowSize from '../../utils/useWindowSize';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {TimeoutId} from '@reduxjs/toolkit/dist/query/core/buildMiddleware/types';
 import st from './YoutubeEmbed.module.scss';
 import classNames from 'classnames';
+import {useActions} from '../../utils/redux-utils';
+import {appActions} from '../Applicaton';
 
 type PlayerType = {
     playVideo: () => void
     pauseVideo: () => void
     setVolume: (volume: number) => void
+    getCurrentTime: () => number
 }
 
 export const YoutubeEmbed = ({embedId}: { embedId: string }) => {
-    const [videoToggle, setVideoToggle] = useState<boolean>(false)
-    const size = useWindowSize();
+    const [videoToggle, setVideoToggle] = useState<boolean>(false);
     const [isInitialized, setInitialised] = useState<boolean>(false);
     const [player, setPlayer] = useState<PlayerType | null>(null);
+    const [intervalId, setIntervalId] = useState<TimeoutId | null>(null);
+    const {changeCurrentTime} = useActions(appActions)
     const shadowClassName = classNames(st.shadow, {[st.show]: isInitialized});
-
-    const onReady = (event: { target: any }) => {
-        setPlayer(event.target);
-        setInitialised(true);
-    };
-
-    useEffect(() => {
-        let intervalId: TimeoutId;
-        if (player) {
-            intervalId = setInterval(() => {
-            }, 100)
-        }
-        return () => clearInterval(intervalId)
-    }, [player])
+    const size = useWindowSize();
 
     const onToggleClick = () => {
         if (!videoToggle) {
             player && player.playVideo();
-            player && player.setVolume(5);
+
         } else {
             player && player.pauseVideo();
         }
         setVideoToggle(toggle => !toggle);
 
+    }
+
+    const onReady = (event: { target: PlayerType }) => {
+        setPlayer(event.target);
+        setInitialised(true);
+        event.target.setVolume(1);
+    };
+
+
+    const onPlay = () => {
+        if (player) {
+            const Id = setInterval(() => {
+                changeCurrentTime(player.getCurrentTime())
+            }, 100)
+            setIntervalId(Id);
+        }
+    }
+
+    const onStop = () => {
+        intervalId&&clearInterval(intervalId)
     }
 
     const opts: Options = {
@@ -66,7 +77,8 @@ export const YoutubeEmbed = ({embedId}: { embedId: string }) => {
                 videoId={embedId}
                 opts={opts}
                 onReady={onReady}
-
+                onPlay={onPlay}
+                onPause={onStop}
             />
             <div className={shadowClassName}
                  onClick={onToggleClick}>

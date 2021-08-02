@@ -3,18 +3,16 @@ import qr from './../../assets/images/qr-code.png'
 import st from './Banner.module.scss';
 import {useSelector} from 'react-redux';
 import {AppRootStateType} from '../../App/store';
-import {AppStatusType} from '../Applicaton/application-reducer';
 import classNames from 'classnames';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useActions} from '../../utils/redux-utils';
 import {appActions} from '../Applicaton';
-import {selectCurrentKey, selectIdle, selectStatus} from '../Applicaton/selectors';
+import {selectCurrentKey, selectIdle, selectShowBanner} from '../Applicaton/selectors';
 
 const keyMap = [['ok']]
 
 export const Banner = () => {
-    const status = useSelector<AppRootStateType, AppStatusType>(selectStatus);
-    const [show, setShow] = useState<boolean>(false);
+    const show = useSelector<AppRootStateType, boolean>(selectShowBanner);
     const curKey = useSelector<AppRootStateType, string | null>(selectCurrentKey);
     const isIdle = useSelector<AppRootStateType, boolean>(selectIdle);
 
@@ -26,19 +24,6 @@ export const Banner = () => {
         }
     }, [isIdle, changeCurKeyMap])
 
-    useEffect(() => {
-        if (status === 'idle') {
-            let timeoutId = setTimeout(() => {
-                setShow(true);
-            }, 5000)
-            return (() => {
-                clearTimeout(timeoutId);
-            })
-        }
-        if (status === 'enter') {
-            setShow(false);
-        }
-    }, [status]);
 
     const onOKClick = () => {
         show && changeStatus('enter');

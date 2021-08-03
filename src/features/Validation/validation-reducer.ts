@@ -7,7 +7,6 @@ import {validationAPI} from '../../api/smart-tv-api';
 const {setLoading} = appActions;
 
 const fetchValidation = createAsyncThunk<{ validation: boolean }, undefined, ThunkError>('smart-tv/', async (params, thunkAPI) => {
-    debugger;
     thunkAPI.dispatch(setLoading('loading'));
     const phoneNumberArr = thunkAPI.getState().app.phoneNumber;
     const number = phoneNumberArr.join('');

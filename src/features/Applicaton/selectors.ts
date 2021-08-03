@@ -18,7 +18,6 @@ export const selectCompleted = (state: AppRootStateType) => state.app.phoneNumbe
 export const selectIsIdle = (state: AppRootStateType) => state.app.status === 'idle';
 export const selectShowHood = (state: AppRootStateType) => state.app.status !== 'idle' && state.app.status !== 'finished';
 export const selectShowBanner = (state: AppRootStateType) => {
-    console.log(state.app.currentTime)
     return state.app.currentTime > 5;
 }
 export const selectIsLoading = (state: AppRootStateType) => state.app.isLoading;

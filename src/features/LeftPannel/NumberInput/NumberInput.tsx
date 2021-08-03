@@ -51,7 +51,6 @@ export const NumberInput: React.FC = () => {
 
     const disableButton = phoneNumberArr.length !== 10 || !isValid;
     const error = isLoading === 'finished' && phoneNumberArr.length === 10 && !isValid;
-    console.log(isLoading);
     const phoneNumberText = classNames({[st.errorText]: error})
     return (
         <div className={containerClasses}>

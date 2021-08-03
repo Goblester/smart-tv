@@ -1,4 +1,5 @@
 import {slice, asyncActions}  from './validation-reducer';
+import * as validateSelectors from './selectors';
 
 const validationReducer = slice.reducer;
 
@@ -11,5 +12,6 @@ const validateActions = {
 
 export {
     validationReducer,
-    validateActions
+    validateActions,
+    validateSelectors
 }

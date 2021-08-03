@@ -20,7 +20,8 @@ const Button: React.FC<SuperButtonPropsType> = (
 
     const finalClassName = classNames(st.default, {
         [st.disabled]: restProps.disabled,
-        [st.active]: active
+        [st.active]: active,
+        [st.red]: red
     }, className)
 
     return (

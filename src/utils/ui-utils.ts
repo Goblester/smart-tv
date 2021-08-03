@@ -45,7 +45,6 @@ export const limitCoordinates = (coordinates: CoordinatesType, shift: Coordinate
 
 export const applyAction = (curKey: string | null, appActions: ActionCreatorsMapObject) => {
 
-
     if (!curKey) {
         return
     }

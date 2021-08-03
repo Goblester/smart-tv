@@ -39,8 +39,8 @@ export const slice = createSlice({
         changeCurrentTime: (state, action: PayloadAction<number>) => {
             state.currentTime = action.payload;
         },
-        setLoading: (state, action: PayloadAction<isLoadingType>) => {
-            state.error = action.payload;
+        setLoading: (state, action: PayloadAction<IsLoadingType>) => {
+            state.isLoading = action.payload;
         },
         setAppError: (state, action: PayloadAction<{ error: string }>) => {
             state.error = action.payload.error;
@@ -51,7 +51,7 @@ export const slice = createSlice({
 
 //types
 
-export type isLoadingType = 'loading' | 'failed' | 'finished' | 'idle'
+export type IsLoadingType = 'loading' | 'failed' | 'finished' | 'idle'
 export type AppStatusType = 'idle' | 'enter' | 'succeeded' | 'finished'
 export type AppInitialStateType = {
     // в каком состоянии находится пользовательский интерфейс
@@ -68,6 +68,8 @@ export type AppInitialStateType = {
     currentTime: number
     //ошибка всего приложения
     error: string | undefined
+    //состояние приложения во время запросов
+    isLoading: IsLoadingType
 }
 
 export type CoordinatesShiftType = {

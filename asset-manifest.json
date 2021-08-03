@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/smart-tv/static/css/main.e5ebba5c.chunk.css",
+    "main.js": "/smart-tv/static/js/main.e9c5bf32.chunk.js",
+    "main.js.map": "/smart-tv/static/js/main.e9c5bf32.chunk.js.map",
+    "runtime-main.js": "/smart-tv/static/js/runtime-main.a002e00f.js",
+    "runtime-main.js.map": "/smart-tv/static/js/runtime-main.a002e00f.js.map",
+    "static/js/2.e4f6b24d.chunk.js": "/smart-tv/static/js/2.e4f6b24d.chunk.js",
+    "static/js/2.e4f6b24d.chunk.js.map": "/smart-tv/static/js/2.e4f6b24d.chunk.js.map",
+    "static/js/3.98af9275.chunk.js": "/smart-tv/static/js/3.98af9275.chunk.js",
+    "static/js/3.98af9275.chunk.js.map": "/smart-tv/static/js/3.98af9275.chunk.js.map",
+    "index.html": "/smart-tv/index.html",
+    "static/css/main.e5ebba5c.chunk.css.map": "/smart-tv/static/css/main.e5ebba5c.chunk.css.map",
+    "static/js/2.e4f6b24d.chunk.js.LICENSE.txt": "/smart-tv/static/js/2.e4f6b24d.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a002e00f.js",
+    "static/js/2.e4f6b24d.chunk.js",
+    "static/css/main.e5ebba5c.chunk.css",
+    "static/js/main.e9c5bf32.chunk.js"
+  ]
+}

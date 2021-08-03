@@ -19,6 +19,7 @@ export const NumberInput: React.FC = () => {
     const {
         changePersonalDataAgreement,
         changeStatus,
+        setLoading
     } = useActions(appActions);
     const {fetchValidation, changeValidation} = useActions(validateActions)
     const phoneNumberArr = useSelector<AppRootStateType, Array<number>>(appSelectors.selectPhoneNumber);
@@ -29,10 +30,15 @@ export const NumberInput: React.FC = () => {
     const phoneNumber = phoneNumberToString(phoneNumberArr);
     useEffect(() => {
         if (phoneNumberArr.length === 10) {
-            changeValidation(false);
+            changeValidation(false)
             fetchValidation();
         }
     }, [changeValidation, phoneNumberArr, fetchValidation])
+    useEffect(() => {
+        if (phoneNumberArr.length !== 10) {
+            setLoading('idle')
+        }
+    }, [setLoading, phoneNumberArr, fetchValidation])
     //functions
     const onAgreementChange = useCallback(() => {
         changePersonalDataAgreement()
@@ -43,23 +49,30 @@ export const NumberInput: React.FC = () => {
         changeStatus('succeeded');
     }, [changeStatus])
 
-    const disableButton = phoneNumberArr.length !== 10 || !isValid ;
-    const errorButton = phoneNumberArr.length === 10 && isLoading === 'finished'&& !isValid;
+    const disableButton = phoneNumberArr.length !== 10 || !isValid;
+    const error = isLoading === 'finished' && phoneNumberArr.length === 10 && !isValid;
+    console.log(isLoading);
+    const phoneNumberText = classNames({[st.errorText]: error})
     return (
         <div className={containerClasses}>
             <h2>Введите ваш номер мобильного телефона</h2>
             <Input value={phoneNumber} className={st.hiddenInput}/>
-            <p>{phoneNumber}</p>
+            <p className={phoneNumberText}>{phoneNumber}</p>
             <p>и с Вами свяжется наш менеджер для дальнейшей консультации</p>
             <DigitButtons/>
-            <Checkbox checked={agreement}
-                      onChangeChecked={onAgreementChange}
-                      spanClassName={st.label}
-                      active={curKey === 'check'}>Согласие на обработку персональных данных</Checkbox>
+            <div className={st.checkbox}>
+                {error?
+                    <p className={phoneNumberText}>НЕВЕРНО ВВЕДЁН НОМЕР</p>
+                    :
+                    <Checkbox checked={agreement}
+                              onChangeChecked={onAgreementChange}
+                              spanClassName={st.label}
+                              active={curKey === 'check'}>Согласие на обработку персональных данных</Checkbox>}
+            </div>
             <Button disabled={disableButton}
                     onClick={onSubmitClick}
                     className={st.submitButton}
-                    red={errorButton}
+                    red={error}
                     active={curKey === 'submit'}>ПОДТВЕРДИТЬ НОМЕР</Button>
 
         </div>

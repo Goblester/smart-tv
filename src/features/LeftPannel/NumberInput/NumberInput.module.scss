@@ -18,6 +18,9 @@
       @include text($primaryFontFamily, 32px, bold, 37px);
     }
   }
+  .errorText{
+    color: red;
+  }
 
   .buttons {
     @include flex(row, space-between, center);
@@ -43,6 +46,14 @@
     width: 240px;
     text-align: left;
     margin-left: 10px;
+  }
+  .checkbox{
+    @include flex(row, center, center);
+    height: 40px;
+    p{
+      @include text($primaryFontFamily, 16px, 500, 18px);
+      margin: 0;
+    }
   }
   .submitButton{
     height: 52px;

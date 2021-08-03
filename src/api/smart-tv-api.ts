@@ -7,7 +7,7 @@ const instance = axios.create({
 
 export const validationAPI = {
     validate: (number:string) => {
-        return instance.get('/validate', {
+        return instance.get<{valid: boolean}>('/validate', {
             params:{
                 access_key: 'c433b46b95aae0cd7e679ee4e0dc23de',
                 country_code: 'RU',
@@ -17,3 +17,4 @@ export const validationAPI = {
         })
     }
 }
+

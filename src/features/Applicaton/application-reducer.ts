@@ -1,14 +1,17 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
+
 export const slice = createSlice({
     name: 'app',
     initialState: {
+        isLoading: 'idle',
         status: 'idle',
         phoneNumber: [],
         personalDataAgreement: false,
         keyCoordinates: [-1, -1],
         curKeyMap: [['ok']],
-        currentTime: 0
+        currentTime: 0,
+        error: undefined
     } as AppInitialStateType,
     reducers: {
         changeStatus: (state, action: PayloadAction<AppStatusType>) => {
@@ -35,14 +38,20 @@ export const slice = createSlice({
         },
         changeCurrentTime: (state, action: PayloadAction<number>) => {
             state.currentTime = action.payload;
+        },
+        setLoading: (state, action: PayloadAction<isLoadingType>) => {
+            state.error = action.payload;
+        },
+        setAppError: (state, action: PayloadAction<{ error: string }>) => {
+            state.error = action.payload.error;
         }
     },
 })
 
+
 //types
 
-
-
+export type isLoadingType = 'loading' | 'failed' | 'finished' | 'idle'
 export type AppStatusType = 'idle' | 'enter' | 'succeeded' | 'finished'
 export type AppInitialStateType = {
     // в каком состоянии находится пользовательский интерфейс
@@ -57,6 +66,8 @@ export type AppInitialStateType = {
     curKeyMap: KeyMapType
     //текущее время видео
     currentTime: number
+    //ошибка всего приложения
+    error: string | undefined
 }
 
 export type CoordinatesShiftType = {

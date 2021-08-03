@@ -1,10 +1,12 @@
 import {combineReducers} from 'redux'
 import {configureStore} from '@reduxjs/toolkit'
 import {appReducer} from '../features/Applicaton';
+import {validationReducer} from '../features/Validation';
 
 
 export const rootReducer = combineReducers({
-    app: appReducer
+    app: appReducer,
+    validation: validationReducer
 })
 
 

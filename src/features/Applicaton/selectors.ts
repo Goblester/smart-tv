@@ -21,5 +21,6 @@ export const selectShowBanner = (state: AppRootStateType) => {
     console.log(state.app.currentTime)
     return state.app.currentTime > 5;
 }
+export const selectIsLoading = (state: AppRootStateType) => state.app.isLoading;
 
 

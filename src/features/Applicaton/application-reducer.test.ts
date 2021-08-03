@@ -10,7 +10,9 @@ beforeEach(() => {
         personalDataAgreement: false,
         keyCoordinates: [0, 0],
         curKeyMap: [['ok']],
-        currentTime: 0
+        currentTime: 0,
+        error: undefined,
+        isLoading: 'idle'
     }
 
 })
@@ -76,10 +78,8 @@ test('changeCurKeyMap should work correctly', () => {
     let newState = appReducer(initState, action);
 
     expect(initState.curKeyMap).toEqual([['ok']]);
-    expect(initState.keyCoordinates).toEqual([0, 0]);
 
     expect(newState.curKeyMap).toEqual([['ok', 'x']]);
-    expect(newState.keyCoordinates).toEqual([-1, -1]);
 })
 
 test('changeCurrentTime should work correctly', () => {
@@ -88,4 +88,22 @@ test('changeCurrentTime should work correctly', () => {
 
     expect(newState.currentTime).toBe(2);
     expect(initState.currentTime).toBe(0);
+})
+
+
+test('setAppError should work correctly', () => {
+    let action = appActions.setAppError({error:'error'});
+    let newState = appReducer(initState, action);
+
+    expect(newState.error).toBe('error');
+    expect(initState.error).toBe(undefined);
+})
+
+
+test('setIsLoading should work correctly', () => {
+    let action = appActions.setLoading('finished');
+    let newState = appReducer(initState, action);
+
+    expect(newState.isLoading).toBe('finished');
+    expect(initState.isLoading).toBe('idle');
 })

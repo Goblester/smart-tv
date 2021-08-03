@@ -45,7 +45,6 @@ export const NumberInput: React.FC = () => {
 
     const disableButton = phoneNumberArr.length !== 10 || !isValid ;
     const errorButton = phoneNumberArr.length === 10 && isLoading === 'finished'&& !isValid;
-
     return (
         <div className={containerClasses}>
             <h2>Введите ваш номер мобильного телефона</h2>
@@ -59,6 +58,7 @@ export const NumberInput: React.FC = () => {
                       active={curKey === 'check'}>Согласие на обработку персональных данных</Checkbox>
             <Button disabled={disableButton}
                     onClick={onSubmitClick}
+                    className={st.submitButton}
                     red={errorButton}
                     active={curKey === 'submit'}>ПОДТВЕРДИТЬ НОМЕР</Button>
 

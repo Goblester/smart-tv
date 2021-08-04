@@ -2,19 +2,13 @@ import axios from "axios"
 
 
 const instance = axios.create({
-    baseURL: 'http://apilayer.net/api'
+    baseURL: 'https://api.antideo.com'
 })
 
 export const validationAPI = {
     validate: (number:string) => {
-        return instance.get<{valid: boolean}>('/validate', {
-            params:{
-                access_key: 'c433b46b95aae0cd7e679ee4e0dc23de',
-                country_code: 'RU',
-                format: 1,
-                number
-            }
-        })
+        return instance.get<{valid: boolean}>(`/phone/ru/${number}?apiKey=d0c79e40375e273a9003233f9bb39f8c`
+        )
     }
 }
 
